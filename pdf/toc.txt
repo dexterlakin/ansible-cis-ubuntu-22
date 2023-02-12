@@ -1,0 +1,336 @@
+1 Initial Setup ........................................................................................................................20
+1.1 Filesystem Configuration .............................................................................................................. 20
+1.1.1 Disable unused filesystems .................................................................................................... 21
+1.1.1.1 Ensure mounting of cramfs filesystems is disabled (Automated) .................................................... 22
+1.1.1.2 Ensure mounting of squashfs filesystems is disabled (Automated) ................................................ 25
+1.1.1.3 Ensure mounting of udf filesystems is disabled (Automated) .......................................................... 28
+1.1.2 Configure /tmp .......................................................................................................................... 31
+1.1.2.1 Ensure /tmp is a separate partition (Automated) ............................................................................. 32
+1.1.2.2 Ensure nodev option set on /tmp partition (Automated) .................................................................. 35
+1.1.2.3 Ensure noexec option set on /tmp partition (Automated) ................................................................ 37
+1.1.2.4 Ensure nosuid option set on /tmp partition (Automated) ................................................................. 39
+1.1.3 Configure /var ........................................................................................................................... 41
+1.1.3.1 Ensure separate partition exists for /var (Automated) ..................................................................... 42
+1.1.3.2 Ensure nodev option set on /var partition (Automated) ................................................................... 45
+1.1.3.3 Ensure nosuid option set on /var partition (Automated) .................................................................. 47
+1.1.4 Configure /var/tmp ................................................................................................................... 49
+1.1.4.1 Ensure separate partition exists for /var/tmp (Automated) .............................................................. 50
+1.1.4.2 Ensure noexec option set on /var/tmp partition (Automated) .......................................................... 53
+1.1.4.3 Ensure nosuid option set on /var/tmp partition (Automated) ........................................................... 55
+1.1.4.4 Ensure nodev option set on /var/tmp partition (Automated) ............................................................ 57
+1.1.5 Configure /var/log..................................................................................................................... 59
+1.1.5.1 Ensure separate partition exists for /var/log (Automated) ............................................................... 60
+1.1.5.2 Ensure nodev option set on /var/log partition (Automated) ............................................................. 62
+1.1.5.3 Ensure noexec option set on /var/log partition (Automated) ............................................................ 64
+1.1.5.4 Ensure nosuid option set on /var/log partition (Automated) ............................................................. 66
+1.1.6 Configure /var/log/audit ........................................................................................................... 68
+1.1.6.1 Ensure separate partition exists for /var/log/audit (Automated) ....................................................... 69
+1.1.6.2 Ensure noexec option set on /var/log/audit partition (Automated) ................................................... 71
+1.1.6.3 Ensure nodev option set on /var/log/audit partition (Automated) ..................................................... 73
+1.1.6.4 Ensure nosuid option set on /var/log/audit partition (Automated) .................................................... 75
+1.1.7 Configure /home ....................................................................................................................... 77
+1.1.7.1 Ensure separate partition exists for /home (Automated) ................................................................. 78
+1.1.7.2 Ensure nodev option set on /home partition (Automated) ............................................................... 81
+1.1.7.3 Ensure nosuid option set on /home partition (Automated) .............................................................. 83
+1.1.8 Configure /dev/shm .................................................................................................................. 85
+1.1.8.1 Ensure nodev option set on /dev/shm partition (Automated) ........................................................... 86
+1.1.8.2 Ensure noexec option set on /dev/shm partition (Automated) ......................................................... 88
+1.1.8.3 Ensure nosuid option set on /dev/shm partition (Automated) .......................................................... 90
+1.1.9 Disable Automounting (Automated) ................................................................................................... 92
+1.1.10 Disable USB Storage (Automated) .................................................................................................. 94
+1.2 Configure Software Updates ........................................................................................................ 98
+1.2.1 Ensure package manager repositories are configured (Manual) ........................................................ 99
+1.2.2 Ensure GPG keys are configured (Manual) ..................................................................................... 101
+1.3 Filesystem Integrity Checking .................................................................................................... 103
+1.3.1 Ensure AIDE is installed (Automated) .............................................................................................. 104
+1.3.2 Ensure filesystem integrity is regularly checked (Automated) .......................................................... 106
+1.4 Secure Boot Settings................................................................................................................... 109
+1.4.1 Ensure bootloader password is set (Automated) ............................................................................. 110
+1.4.2 Ensure permissions on bootloader config are configured (Automated) ............................................ 113
+1.5 Additional Process Hardening ................................................................................................... 117
+1.5.1 Ensure address space layout randomization (ASLR) is enabled (Automated) ................................. 118
+1.5.2 Ensure prelink is not installed (Automated) ...................................................................................... 122
+1.5.3 Ensure Automatic Error Reporting is not enabled (Automated) ....................................................... 124
+1.5.4 Ensure core dumps are restricted (Automated) ............................................................................... 126
+1.6 Mandatory Access Control ......................................................................................................... 128
+1.6.1 Configure AppArmor.............................................................................................................. 129
+1.6.1.1 Ensure AppArmor is installed (Automated) ................................................................................... 130
+1.6.1.2 Ensure AppArmor is enabled in the bootloader configuration (Automated)................................... 132
+1.6.1.3 Ensure all AppArmor Profiles are in enforce or complain mode (Automated) ............................... 134
+1.6.1.4 Ensure all AppArmor Profiles are enforcing (Automated) .............................................................. 136
+1.7 Command Line Warning Banners .............................................................................................. 138
+1.7.1 Ensure message of the day is configured properly (Automated) ...................................................... 139
+1.7.2 Ensure local login warning banner is configured properly (Automated) ........................................... 141
+1.7.3 Ensure remote login warning banner is configured properly (Automated)........................................ 143
+1.7.4 Ensure permissions on /etc/motd are configured (Automated) ........................................................ 145
+1.7.5 Ensure permissions on /etc/issue are configured (Automated) ........................................................ 147
+1.7.6 Ensure permissions on /etc/issue.net are configured (Automated) .................................................. 149
+1.8 GNOME Display Manager ............................................................................................................ 151
+1.8.1 Ensure GNOME Display Manager is removed (Automated) ............................................................ 152
+1.8.2 Ensure GDM login banner is configured (Automated) ...................................................................... 154
+1.8.3 Ensure GDM disable-user-list option is enabled (Automated).......................................................... 158
+1.8.4 Ensure GDM screen locks when the user is idle (Automated) ......................................................... 162
+1.8.5 Ensure GDM screen locks cannot be overridden (Automated) ........................................................ 167
+1.8.6 Ensure GDM automatic mounting of removable media is disabled (Automated) ............................. 172
+1.8.7 Ensure GDM disabling automatic mounting of removable media is not overridden (Automated) ..... 178
+1.8.8 Ensure GDM autorun-never is enabled (Automated) ....................................................................... 183
+1.8.9 Ensure GDM autorun-never is not overridden (Automated) ............................................................. 188
+1.8.10 Ensure XDCMP is not enabled (Automated) .................................................................................. 193
+1.9 Ensure updates, patches, and additional security software are installed (Manual) ............................. 195
+2 Services ............................................................................................................................197
+2.1 Configure Time Synchronization ............................................................................................... 198
+2.1.1 Ensure time synchronization is in use................................................................................. 199
+2.1.1.1 Ensure a single time synchronization daemon is in use (Automated) ........................................... 200
+2.1.2 Configure chrony ................................................................................................................... 204
+2.1.2.1 Ensure chrony is configured with authorized timeserver (Manual) ................................................ 205
+2.1.2.2 Ensure chrony is running as user _chrony (Automated) ............................................................... 209
+2.1.2.3 Ensure chrony is enabled and running (Automated) ..................................................................... 211
+2.1.3 Configure systemd-timesyncd.............................................................................................. 213
+2.1.3.1 Ensure systemd-timesyncd configured with authorized timeserver (Manual) ................................ 215
+2.1.3.2 Ensure systemd-timesyncd is enabled and running (Automated) ................................................. 218
+2.1.4 Configure ntp .......................................................................................................................... 220
+2.1.4.1 Ensure ntp access control is configured (Automated) ................................................................... 221
+2.1.4.2 Ensure ntp is configured with authorized timeserver (Manual) ...................................................... 225
+2.1.4.3 Ensure ntp is running as user ntp (Automated) ............................................................................. 228
+2.1.4.4 Ensure ntp is enabled and running (Automated) ........................................................................... 230
+2.2 Special Purpose Services ........................................................................................................... 232
+2.2.1 Ensure X Window System is not installed (Automated) ................................................................... 233
+2.2.2 Ensure Avahi Server is not installed (Automated) ............................................................................ 235
+2.2.3 Ensure CUPS is not installed (Automated) ...................................................................................... 237
+2.2.4 Ensure DHCP Server is not installed (Automated) ........................................................................... 239
+2.2.5 Ensure LDAP server is not installed (Automated) ............................................................................ 241
+2.2.6 Ensure NFS is not installed (Automated) ......................................................................................... 243
+2.2.7 Ensure DNS Server is not installed (Automated) ............................................................................. 244
+2.2.8 Ensure FTP Server is not installed (Automated) .............................................................................. 246
+2.2.9 Ensure HTTP server is not installed (Automated) ............................................................................ 248
+2.2.10 Ensure IMAP and POP3 server are not installed (Automated) ....................................................... 250
+2.2.11 Ensure Samba is not installed (Automated) ................................................................................... 252
+2.2.12 Ensure HTTP Proxy Server is not installed (Automated) ............................................................... 254
+2.2.13 Ensure SNMP Server is not installed (Automated) ........................................................................ 256
+2.2.14 Ensure NIS Server is not installed (Automated) ............................................................................. 258
+2.2.15 Ensure mail transfer agent is configured for local-only mode (Automated) .................................... 260
+2.2.16 Ensure rsync service is either not installed or masked (Automated) .............................................. 262
+2.3 Service Clients ............................................................................................................................. 264
+2.3.1 Ensure NIS Client is not installed (Automated) ................................................................................ 265
+2.3.2 Ensure rsh client is not installed (Automated) .................................................................................. 267
+2.3.3 Ensure talk client is not installed (Automated) ................................................................................. 269
+2.3.4 Ensure telnet client is not installed (Automated) .............................................................................. 271
+2.3.5 Ensure LDAP client is not installed (Automated) .............................................................................. 273
+2.3.6 Ensure RPC is not installed (Automated) ......................................................................................... 275
+2.4 Ensure nonessential services are removed or masked (Manual) ........................................................ 277
+3 Network Configuration ....................................................................................................279
+3.1 Disable unused network protocols and devices ...................................................................... 280
+3.1.1 Ensure system is checked to determine if IPv6 is enabled (Manual) ............................................... 281
+3.1.2 Ensure wireless interfaces are disabled (Automated) ...................................................................... 285
+3.2 Network Parameters (Host Only) ................................................................................................ 288
+3.2.1 Ensure packet redirect sending is disabled (Automated) ................................................................. 289
+3.2.2 Ensure IP forwarding is disabled (Automated) ................................................................................. 293
+3.3 Network Parameters (Host and Router)..................................................................................... 299
+3.3.1 Ensure source routed packets are not accepted (Automated) ......................................................... 300
+3.3.2 Ensure ICMP redirects are not accepted (Automated) ..................................................................... 306
+3.3.3 Ensure secure ICMP redirects are not accepted (Automated) ......................................................... 312
+3.3.4 Ensure suspicious packets are logged (Automated) ........................................................................ 316
+3.3.5 Ensure broadcast ICMP requests are ignored (Automated) ............................................................. 320
+3.3.6 Ensure bogus ICMP responses are ignored (Automated) ................................................................ 324
+3.3.7 Ensure Reverse Path Filtering is enabled (Automated) ................................................................... 328
+3.3.8 Ensure TCP SYN Cookies is enabled (Automated) ......................................................................... 332
+3.3.9 Ensure IPv6 router advertisements are not accepted (Automated) .................................................. 336
+3.4 Uncommon Network Protocols .................................................................................................. 342
+3.4.1 Ensure DCCP is disabled (Automated) ............................................................................................ 343
+3.4.2 Ensure SCTP is disabled (Automated)............................................................................................. 346
+3.4.3 Ensure RDS is disabled (Automated) .............................................................................................. 349
+3.4.4 Ensure TIPC is disabled (Automated) .............................................................................................. 352
+3.5 Firewall Configuration ................................................................................................................. 355
+3.5.1 Configure UncomplicatedFirewall ........................................................................................ 356
+3.5.1.1 Ensure ufw is installed (Automated) .............................................................................................. 357
+3.5.1.2 Ensure iptables-persistent is not installed with ufw (Automated) .................................................. 359
+3.5.1.3 Ensure ufw service is enabled (Automated) .................................................................................. 361
+3.5.1.4 Ensure ufw loopback traffic is configured (Automated) ................................................................. 364
+3.5.1.5 Ensure ufw outbound connections are configured (Manual) ......................................................... 366
+3.5.1.6 Ensure ufw firewall rules exist for all open ports (Automated) ....................................................... 368
+3.5.1.7 Ensure ufw default deny firewall policy (Automated) ..................................................................... 370
+3.5.2 Configure nftables.................................................................................................................. 372
+3.5.2.1 Ensure nftables is installed (Automated) ....................................................................................... 375
+3.5.2.2 Ensure ufw is uninstalled or disabled with nftables (Automated) .................................................. 377
+3.5.2.3 Ensure iptables are flushed with nftables (Manual) ....................................................................... 379
+3.5.2.4 Ensure a nftables table exists (Automated) ................................................................................... 381
+3.5.2.5 Ensure nftables base chains exist (Automated) ............................................................................ 383
+3.5.2.6 Ensure nftables loopback traffic is configured (Automated) .......................................................... 385
+3.5.2.7 Ensure nftables outbound and established connections are configured (Manual) ........................ 387
+3.5.2.8 Ensure nftables default deny firewall policy (Automated) .............................................................. 389
+3.5.2.9 Ensure nftables service is enabled (Automated) ........................................................................... 391
+3.5.2.10 Ensure nftables rules are permanent (Automated)...................................................................... 393
+3.5.3 Configure iptables .................................................................................................................. 396
+3.5.3.1 Configure iptables software ............................................................................................ 397
+3.5.3.1.1 Ensure iptables packages are installed (Automated) ................................................................. 398
+3.5.3.1.2 Ensure nftables is not installed with iptables (Automated) ......................................................... 400
+3.5.3.1.3 Ensure ufw is uninstalled or disabled with iptables (Automated) ................................................ 402
+3.5.3.2 Configure IPv4 iptables .................................................................................................... 404
+3.5.3.2.1 Ensure iptables default deny firewall policy (Automated) ........................................................... 405
+3.5.3.2.2 Ensure iptables loopback traffic is configured (Automated) ....................................................... 407
+3.5.3.2.3 Ensure iptables outbound and established connections are configured (Manual) ..................... 409
+3.5.3.2.4 Ensure iptables firewall rules exist for all open ports (Automated) ............................................. 411
+3.5.3.3 Configure IPv6 ip6tables .................................................................................................. 414
+3.5.3.3.1 Ensure ip6tables default deny firewall policy (Automated) ......................................................... 415
+3.5.3.3.2 Ensure ip6tables loopback traffic is configured (Automated) ..................................................... 418
+3.5.3.3.3 Ensure ip6tables outbound and established connections are configured (Manual) ................... 421
+3.5.3.3.4 Ensure ip6tables firewall rules exist for all open ports (Automated) ........................................... 424
+4 Logging and Auditing ......................................................................................................427
+4.1 Configure System Accounting (auditd) ..................................................................................... 428
+4.1.1 Ensure auditing is enabled ................................................................................................... 430
+4.1.1.1 Ensure auditd is installed (Automated).......................................................................................... 431
+4.1.1.2 Ensure auditd service is enabled and active (Automated) ............................................................ 433
+4.1.1.3 Ensure auditing for processes that start prior to auditd is enabled (Automated) ........................... 435
+4.1.1.4 Ensure audit_backlog_limit is sufficient (Automated) .................................................................... 437
+4.1.2 Configure Data Retention ...................................................................................................... 439
+4.1.2.1 Ensure audit log storage size is configured (Automated) .............................................................. 440
+4.1.2.2 Ensure audit logs are not automatically deleted (Automated) ....................................................... 442
+4.1.2.3 Ensure system is disabled when audit logs are full (Automated) .................................................. 444
+4.1.3 Configure auditd rules ........................................................................................................... 447
+4.1.3.1 Ensure changes to system administration scope (sudoers) is collected (Automated) ................... 448
+4.1.3.2 Ensure actions as another user are always logged (Automated) .................................................. 452
+4.1.3.3 Ensure events that modify the sudo log file are collected (Automated) ......................................... 456
+4.1.3.4 Ensure events that modify date and time information are collected (Automated) ......................... 459
+4.1.3.5 Ensure events that modify the system's network environment are collected (Automated) ............ 463
+4.1.3.6 Ensure use of privileged commands are collected (Automated) ................................................... 467
+4.1.3.7 Ensure unsuccessful file access attempts are collected (Automated) ........................................... 471
+4.1.3.8 Ensure events that modify user/group information are collected (Automated) .............................. 475
+4.1.3.9 Ensure discretionary access control permission modification events are collected (Automated) .. 479
+4.1.3.10 Ensure successful file system mounts are collected (Automated) .............................................. 484
+4.1.3.11 Ensure session initiation information is collected (Automated) ................................................... 488
+4.1.3.12 Ensure login and logout events are collected (Automated) ......................................................... 492
+4.1.3.13 Ensure file deletion events by users are collected (Automated) .................................................. 496
+4.1.3.14 Ensure events that modify the system's Mandatory Access Controls are collected (Automated)500
+4.1.3.15 Ensure successful and unsuccessful attempts to use the chcon command are recorded
+4.1.3.16 Ensure successful and unsuccessful attempts to use the setfacl command are recorded
+4.1.3.17 Ensure successful and unsuccessful attempts to use the chacl command are recorded
+4.1.3.18 Ensure successful and unsuccessful attempts to use the usermod command are recorded
+4.1.3.19 Ensure kernel module loading unloading and modification is collected (Automated) .................. 520
+4.1.3.20 Ensure the audit configuration is immutable (Automated) ........................................................... 525
+4.1.3.21 Ensure the running and on disk configuration is the same (Manual) ........................................... 528
+4.1.4 Configure auditd file access ................................................................................................. 530
+4.1.4.1 Ensure audit log files are mode 0640 or less permissive (Automated) ......................................... 531
+4.1.4.2 Ensure only authorized users own audit log files (Automated) ...................................................... 533
+4.1.4.3 Ensure only authorized groups are assigned ownership of audit log files (Automated) ................ 535
+4.1.4.4 Ensure the audit log directory is 0750 or more restrictive (Automated) ......................................... 537
+4.1.4.5 Ensure audit configuration files are 640 or more restrictive (Automated) ...................................... 539
+4.1.4.6 Ensure audit configuration files are owned by root (Automated) ................................................... 541
+4.1.4.7 Ensure audit configuration files belong to group root (Automated) ............................................... 543
+4.1.4.8 Ensure audit tools are 755 or more restrictive (Automated) .......................................................... 545
+4.1.4.9 Ensure audit tools are owned by root (Automated) ....................................................................... 547
+4.1.4.10 Ensure audit tools belong to group root (Automated) .................................................................. 549
+4.1.4.11 Ensure cryptographic mechanisms are used to protect the integrity of audit tools (Automated) . 551
+4.2 Configure Logging ....................................................................................................................... 553
+4.2.1 Configure journald ................................................................................................................. 554
+4.2.1.1 Ensure journald is configured to send logs to a remote log host ............................... 555
+4.2.1.1.1 Ensure systemd-journal-remote is installed (Automated) ........................................................... 556
+4.2.1.1.2 Ensure systemd-journal-remote is configured (Manual) ............................................................. 558
+4.2.1.1.3 Ensure systemd-journal-remote is enabled (Manual) ................................................................. 560
+4.2.1.1.4 Ensure journald is not configured to recieve logs from a remote client (Automated) ................. 562
+4.2.1.2 Ensure journald service is enabled (Automated) ........................................................................... 564
+4.2.1.3 Ensure journald is configured to compress large log files (Automated)......................................... 566
+4.2.1.4 Ensure journald is configured to write logfiles to persistent disk (Automated) ............................... 568
+4.2.1.5 Ensure journald is not configured to send logs to rsyslog (Manual) .............................................. 570
+4.2.1.6 Ensure journald log rotation is configured per site policy (Manual) ............................................... 572
+4.2.1.7 Ensure journald default file permissions configured (Manual) ....................................................... 574
+4.2.2 Configure rsyslog................................................................................................................... 576
+4.2.2.1 Ensure rsyslog is installed (Automated) ........................................................................................ 577
+4.2.2.2 Ensure rsyslog service is enabled (Automated) ............................................................................ 579
+4.2.2.3 Ensure journald is configured to send logs to rsyslog (Manual) .................................................... 581
+4.2.2.4 Ensure rsyslog default file permissions are configured (Automated) ............................................ 583
+4.2.2.5 Ensure logging is configured (Manual) .......................................................................................... 585
+4.2.2.6 Ensure rsyslog is configured to send logs to a remote log host (Manual) ..................................... 588
+4.2.2.7 Ensure rsyslog is not configured to receive logs from a remote client (Automated) ...................... 590
+4.2.3 Ensure all logfiles have appropriate permissions and ownership (Automated) ................................ 593
+5 Access, Authentication and Authorization ....................................................................599
+5.1 Configure time-based job schedulers ....................................................................................... 600
+5.1.1 Ensure cron daemon is enabled and running (Automated) .............................................................. 601
+5.1.2 Ensure permissions on /etc/crontab are configured (Automated) .................................................... 602
+5.1.3 Ensure permissions on /etc/cron.hourly are configured (Automated) ............................................... 604
+5.1.4 Ensure permissions on /etc/cron.daily are configured (Automated) ................................................. 606
+5.1.5 Ensure permissions on /etc/cron.weekly are configured (Automated) ............................................. 608
+5.1.6 Ensure permissions on /etc/cron.monthly are configured (Automated) ............................................ 610
+5.1.7 Ensure permissions on /etc/cron.d are configured (Automated) ...................................................... 612
+5.1.8 Ensure cron is restricted to authorized users (Automated) .............................................................. 614
+5.1.9 Ensure at is restricted to authorized users (Automated) .................................................................. 616
+5.2 Configure SSH Server ................................................................................................................. 618
+5.2.1 Ensure permissions on /etc/ssh/sshd_config are configured (Automated) ....................................... 619
+5.2.2 Ensure permissions on SSH private host key files are configured (Automated) .............................. 621
+5.2.3 Ensure permissions on SSH public host key files are configured (Automated) ................................ 625
+5.2.4 Ensure SSH access is limited (Automated)...................................................................................... 628
+5.2.5 Ensure SSH LogLevel is appropriate (Automated) .......................................................................... 631
+5.2.6 Ensure SSH PAM is enabled (Automated)....................................................................................... 633
+5.2.7 Ensure SSH root login is disabled (Automated) ............................................................................... 635
+5.2.8 Ensure SSH HostbasedAuthentication is disabled (Automated) ...................................................... 637
+5.2.9 Ensure SSH PermitEmptyPasswords is disabled (Automated) ........................................................ 639
+5.2.10 Ensure SSH PermitUserEnvironment is disabled (Automated) ...................................................... 641
+5.2.11 Ensure SSH IgnoreRhosts is enabled (Automated) ....................................................................... 643
+5.2.12 Ensure SSH X11 forwarding is disabled (Automated) .................................................................... 645
+5.2.13 Ensure only strong Ciphers are used (Automated) ........................................................................ 647
+5.2.14 Ensure only strong MAC algorithms are used (Automated) ........................................................... 650
+5.2.15 Ensure only strong Key Exchange algorithms are used (Automated) ............................................ 653
+5.2.16 Ensure SSH AllowTcpForwarding is disabled (Automated) ........................................................... 656
+5.2.17 Ensure SSH warning banner is configured (Automated) ................................................................ 658
+5.2.18 Ensure SSH MaxAuthTries is set to 4 or less (Automated) ............................................................ 660
+5.2.19 Ensure SSH MaxStartups is configured (Automated) .................................................................... 662
+5.2.20 Ensure SSH MaxSessions is set to 10 or less (Automated)........................................................... 664
+5.2.21 Ensure SSH LoginGraceTime is set to one minute or less (Automated) ........................................ 666
+5.2.22 Ensure SSH Idle Timeout Interval is configured (Automated) ........................................................ 668
+5.3 Configure privilege escalation ................................................................................................... 671
+5.3.1 Ensure sudo is installed (Automated) .............................................................................................. 672
+5.3.2 Ensure sudo commands use pty (Automated) ................................................................................. 674
+5.3.3 Ensure sudo log file exists (Automated) ........................................................................................... 676
+5.3.4 Ensure users must provide password for privilege escalation (Automated) ..................................... 678
+5.3.5 Ensure re-authentication for privilege escalation is not disabled globally (Automated) .................... 680
+5.3.6 Ensure sudo authentication timeout is configured correctly (Automated)......................................... 682
+5.3.7 Ensure access to the su command is restricted (Automated) .......................................................... 684
+5.4 Configure PAM ............................................................................................................................. 686
+5.4.1 Ensure password creation requirements are configured (Automated) ............................................. 687
+5.4.2 Ensure lockout for failed password attempts is configured (Automated) .......................................... 691
+5.4.3 Ensure password reuse is limited (Automated) ................................................................................ 695
+5.4.4 Ensure password hashing algorithm is up to date with the latest standards (Automated) ............... 697
+5.4.5 Ensure all current passwords uses the configured hashing algorithm (Manual) .............................. 700
+5.5 User Accounts and Environment ............................................................................................... 702
+5.5.1 Set Shadow Password Suite Parameters ............................................................................ 703
+5.5.1.1 Ensure minimum days between password changes is configured (Automated) ........................... 704
+5.5.1.2 Ensure password expiration is 365 days or less (Automated) ....................................................... 706
+5.5.1.3 Ensure password expiration warning days is 7 or more (Automated) ........................................... 708
+5.5.1.4 Ensure inactive password lock is 30 days or less (Automated) ..................................................... 710
+5.5.1.5 Ensure all users last password change date is in the past (Automated) ....................................... 712
+5.5.2 Ensure system accounts are secured (Automated) ......................................................................... 714
+5.5.3 Ensure default group for the root account is GID 0 (Automated) ..................................................... 716
+5.5.4 Ensure default user umask is 027 or more restrictive (Automated) .................................................. 718
+5.5.5 Ensure default user shell timeout is 900 seconds or less (Automated) ............................................ 723
+6 System Maintenance .......................................................................................................727
+6.1 System File Permissions ............................................................................................................ 728
+6.1.1 Ensure permissions on /etc/passwd are configured (Automated) .................................................... 729
+6.1.2 Ensure permissions on /etc/passwd- are configured (Automated) ................................................... 731
+6.1.3 Ensure permissions on /etc/group are configured (Automated) ....................................................... 733
+6.1.4 Ensure permissions on /etc/group- are configured (Automated) ...................................................... 735
+6.1.5 Ensure permissions on /etc/shadow are configured (Automated) .................................................... 737
+6.1.6 Ensure permissions on /etc/shadow- are configured (Automated) ................................................... 739
+6.1.7 Ensure permissions on /etc/gshadow are configured (Automated) .................................................. 741
+6.1.8 Ensure permissions on /etc/gshadow- are configured (Automated) ................................................. 743
+6.1.9 Ensure no world writable files exist (Automated) ............................................................................. 745
+6.1.10 Ensure no unowned files or directories exist (Automated) ............................................................. 747
+6.1.11 Ensure no ungrouped files or directories exist (Automated) ........................................................... 749
+6.1.12 Audit SUID executables (Manual) .................................................................................................. 751
+6.1.13 Audit SGID executables (Manual) .................................................................................................. 753
+6.2 Local User and Group Settings .................................................................................................. 755
+6.2.1 Ensure accounts in /etc/passwd use shadowed passwords (Automated) ........................................ 756
+6.2.2 Ensure /etc/shadow password fields are not empty (Automated) .................................................... 758
+6.2.3 Ensure all groups in /etc/passwd exist in /etc/group (Automated) .................................................... 760
+6.2.4 Ensure shadow group is empty (Automated) ................................................................................... 761
+6.2.5 Ensure no duplicate UIDs exist (Automated) ................................................................................... 763
+6.2.6 Ensure no duplicate GIDs exist (Automated) ................................................................................... 764
+6.2.7 Ensure no duplicate user names exist (Automated) ......................................................................... 765
+6.2.8 Ensure no duplicate group names exist (Automated) ...................................................................... 766
+6.2.9 Ensure root PATH Integrity (Automated).......................................................................................... 767
+6.2.10 Ensure root is the only UID 0 account (Automated) ....................................................................... 768
+6.2.11 Ensure local interactive user home directories exist (Automated) .................................................. 769
+6.2.12 Ensure local interactive users own their home directories (Automated) ......................................... 771
+6.2.13 Ensure local interactive user home directories are mode 750 or more restrictive (Automated) ..... 773
+6.2.14 Ensure no local interactive user has .netrc files (Automated) ........................................................ 777
+6.2.15 Ensure no local interactive user has .forward files (Automated) .................................................... 780
+6.2.16 Ensure no local interactive user has .rhosts files (Automated) ....................................................... 782
+6.2.17 Ensure local interactive user dot files are not group or world writable (Automated) ....................... 784

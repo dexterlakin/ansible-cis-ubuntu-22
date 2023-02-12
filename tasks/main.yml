@@ -1,0 +1,1 @@
+- import_tasks: ./tasks/1_Initial_Setup/1.1_Filesystem_Configuration/1.1.1_Disable_unused_filesystems/1.1.1.1_Ensure_mounting_of_cramfs_filesystems_is_disabled__Automated/audit.yml

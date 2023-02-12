@@ -1,0 +1,23 @@
+- name: "AUTOMATED | 1.1.1.2 | Ensure mounting of freevxfs filesystems is disabled"
+  block:
+    - name: "AUTOMATED | 1.1.1.2 | Ensure mounting of freevxfs filesystems is disabled | Edit modprobe config"
+      lineinfile:
+        dest: /etc/modprobe.d/freevxfs.conf
+        regexp: "^(#)?install freevxfs(\\s|$)"
+        line: install freevxfs /bin/true
+        create: yes
+
+    - name: "AUTOMATED | 1.1.1.2 | Ensure mounting of freevxfs filesystems is disabled | Disable freevxfs"
+      modprobe:
+        name: freevxfs
+        state: absent
+      when: ansible_connection != 'docker'
+  when:
+    - ubtu22cis_rule_1_1_1_2
+  tags:
+    - level1-server
+    - level1-workstation
+    - automated
+    - patch
+    - rule_1.1.1.2
+    - freevxfs

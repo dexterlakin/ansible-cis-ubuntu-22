@@ -1,0 +1,28 @@
+# Description:
+# This variable limits the types of MAC algorithms that SSH can use during communication.
+
+# Rationale:
+# MD5 and 96-bit MAC algorithms are considered weak and have been shown to increase
+# exploitability in SSH downgrade attacks. Weak algorithms continue to have a great deal
+# of attention as a weak spot that can be exploited with expanded computing power. An
+# attacker that breaks the algorithm could take advantage of a MiTM position to decrypt
+# the SSH tunnel and capture credentials and information.
+
+- name: Edit /etc/ssh/sshd_config and add/modify the MACs line
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^MACs"
+    line: "MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256"
+    state: present
+
+- name: Audit SSH MAC algorithms
+  shell: |
+    ssh_output=$(sshd -T -C user=root -C host="$(hostname)" -C addr="$(grep $(hostname) /etc/hosts | awk '{print $1}')")
+    if echo "$ssh_output" | grep -i "MACs" | grep -q -E "hmac-md5|hmac-md5-96|hmac-ripemd160|hmac-sha1|hmac-sha1-96|umac-64@openssh.com|umac-128@openssh.com|hmac-md5-etm@openssh.com|hmac-md5-96-etm@openssh.com|hmac-ripemd160-etm@openssh.com|hmac-sha1-etm@openssh.com|hmac-sha1-96-etm@openssh.com|umac-64-etm@openssh.com|umac-128-etm@openssh.com"; then
+      echo "Error: Weak MAC algorithms detected in ssh_output"
+      exit 1
+    else
+      echo "Success: No weak MAC algorithms detected in ssh_output"
+  register: ssh_audit_result
+  changed_when: false
+  failed_when: ssh_audit_result.rc != 0
